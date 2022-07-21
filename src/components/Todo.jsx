@@ -6,7 +6,6 @@ export default function Todo(props) {
     let dispatch = props.dispatch;
     let completed = todoObj.completed;
     let id = todoObj.id;
-    console.log(todoObj)
     let tick = ""
     if (completed) tick = "✔"
     return (

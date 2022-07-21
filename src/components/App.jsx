@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useReducer } from 'react'
 import Todo from "./Todo"
 import darkBG from "../dark-mode.jpg"
 import lightBG from "../light-mode.jpg"
@@ -57,14 +57,6 @@ export default function App() {
     const [state, dispatch] = useReducer(reducer, defaultState);
 
     //localStorage
-    console.log(localStorage)
-
-    useEffect(() => {
-        const todo2 = JSON.parse(localStorage.getItem('todos2'));
-        if (todo2) {
-            dispatch({ type: 'get-local-todos' })
-        }
-    }, []);
 
 
 
@@ -81,7 +73,28 @@ export default function App() {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let date = new Date()
 
-    return (
+    if (state.todos.length <= 0) {
+        return (
+            <div className="body-container" style={{ backgroundImage: state.darkmode ? `url(${darkBG})` : `url(${lightBG})` }}>
+
+                <div className="main">
+                    <div style={{ color: state.darkmode ? "white" : "black" }} className="header">TODOs</div>
+                    <button onClick={() => dispatch({ type: "toggle-darkmode" })} className="darkmode-toggle">
+                        <img width={"20px"} src={state.darkmode ? moon : sun} alt="" />
+                    </button>
+
+                    <div style={{ color: state.darkmode ? "white" : "black" }} className="date">{` ${days[date.getDay()]}  ${months[date.getMonth()]} ${date.getDate()}`}</div>
+                    <div className="add-container">
+                        <input onChange={(e) => dispatch({ type: "save", payload: e.target.value })} onKeyPress={(e) => { if (e.key === 'Enter') { dispatch({ type: 'add' }) } }} type="text" value={state.saved} className="add-input" placeholder='Create a new Todo' />
+                        <button onClick={() => { dispatch({ type: "add" }); }} className="add-button">+</button>
+                    </div>
+                    <div className="todos-container">
+                        <h4 style={{margin: "auto auto", textShadow: "none"}}>Create a new Todo</h4>
+                    </div>
+                </div>
+            </div>
+        )
+    } else return (
         <div className="body-container" style={{ backgroundImage: state.darkmode ? `url(${darkBG})` : `url(${lightBG})` }}>
 
             <div className="main">
