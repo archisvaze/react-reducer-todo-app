@@ -10,8 +10,8 @@ export default function Todo(props) {
     if (completed) tick = "✔"
     return (
         <div style={{margin : completed ? "0": "10px 0"}} className='todo'>
-            <button onClick={() => { dispatch({ type: "complete", payload: id }) }} className="complete-button" style={{ backgroundColor: completed ? "rgba(0, 200, 27, 0.3)" : "rgba(0, 0, 0, 0.1)", color: completed ? "white" : "black" }}>{tick}</button>
-            <div className="todo-title" style={{ textDecoration: completed ? "line-through" : "none", color: completed ? "grey" : "black" }}>
+            <button onClick={() => { dispatch({ type: "complete", payload: id }) }} className="complete-button" style={{ backgroundColor: completed ? "rgb(127, 192, 135)" : "rgba(0, 0, 0, 0.5)", color: completed ? "white" : "black" }}>{tick}</button>
+            <div className="todo-title" style={{ textDecorationLine: completed ? "line-through" : "none" }}>
                 {content}</div>
         </div>
     )

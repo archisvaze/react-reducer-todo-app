@@ -77,7 +77,7 @@ export default function App() {
         return (
             <div className="body-container" style={{ backgroundImage: state.darkmode ? `url(${darkBG})` : `url(${lightBG})` }}>
 
-                <div className="main">
+                <div className="main" style={{ backgroundColor: state.darkmode ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.6)" }}>
                     <div style={{ color: state.darkmode ? "white" : "black" }} className="header">TODOs</div>
                     <button onClick={() => dispatch({ type: "toggle-darkmode" })} className="darkmode-toggle">
                         <img width={"20px"} src={state.darkmode ? moon : sun} alt="" />
@@ -88,8 +88,8 @@ export default function App() {
                         <input onChange={(e) => dispatch({ type: "save", payload: e.target.value })} onKeyPress={(e) => { if (e.key === 'Enter') { dispatch({ type: 'add' }) } }} type="text" value={state.saved} className="add-input" placeholder='Create a new Todo' />
                         <button onClick={() => { dispatch({ type: "add" }); }} className="add-button">+</button>
                     </div>
-                    <div className="todos-container">
-                        <h4 style={{margin: "auto auto", textShadow: "none"}}>Create a new Todo</h4>
+                    <div className="todos-container" style={{ color: state.darkmode ? "white" : "black" }}>
+                        <h4 style={{ margin: "auto auto", textShadow: "none" }}>Create a new Todo</h4>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@ export default function App() {
     } else return (
         <div className="body-container" style={{ backgroundImage: state.darkmode ? `url(${darkBG})` : `url(${lightBG})` }}>
 
-            <div className="main">
+            <div className="main" style={{ backgroundColor: state.darkmode ? "rgba(0, 0, 0, 0.6)" : "rgba(255, 255, 255, 0.6)" }}>
                 <div style={{ color: state.darkmode ? "white" : "black" }} className="header">TODOs</div>
                 <button onClick={() => dispatch({ type: "toggle-darkmode" })} className="darkmode-toggle">
                     <img width={"20px"} src={state.darkmode ? moon : sun} alt="" />
@@ -109,7 +109,7 @@ export default function App() {
                     <button onClick={() => { dispatch({ type: "add" }); }} className="add-button">+</button>
                 </div>
 
-                <div className="todos-container">
+                <div style={{ color: state.darkmode ? "white" : "black" }} className="todos-container">
                     {state.flag === 'all' ? state.todos.map(todoObj => {
                         return (
                             <Todo key={todoObj.id} todoObj={todoObj} dispatch={dispatch} />
@@ -130,14 +130,14 @@ export default function App() {
                     }
                 </div>
                 <div className="bottom-container">
-                    <div className="left">{active} todos left</div>
+                 
                     <div className="toggles-container">
 
                         <button onClick={() => dispatch({ type: 'toggle-all' })} className="toggle all-toggle" style={{ color: state.flag === 'all' ? "#1283da" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'all' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'all' ? "bold" : "normal" }}>All</button>
 
-                        <button onClick={() => dispatch({ type: 'toggle-active' })} className="toggle active-toggle" style={{ color: state.flag === 'active' ? "#1283da" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'active' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'active' ? "bold" : "normal" }}>Active</button>
+                        <button onClick={() => dispatch({ type: 'toggle-active' })} className="toggle active-toggle" style={{ color: state.flag === 'active' ? "#1283da" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'active' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'active' ? "bold" : "normal" }}>{active} Active</button>
 
-                        <button onClick={() => dispatch({ type: 'toggle-completed' })} className="toggle completed-toggle" style={{ color: state.flag === 'completed' ? "#1283da" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'completed' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'completed' ? "bold" : "normal" }}>Completed</button>
+                        <button onClick={() => dispatch({ type: 'toggle-completed' })} className="toggle completed-toggle" style={{ color: state.flag === 'completed' ? "rgb(0, 146, 17)" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'completed' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'completed' ? "bold" : "normal" }}>{completed} Completed</button>
 
                     </div>
                     <button onClick={() => dispatch({ type: 'clear-completed' })} className="clear-button">Clear Completed</button>
