@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Todo from "./Todo"
 import darkBG from "../dark-mode.jpg"
 import lightBG from "../light-mode.jpg"
@@ -32,6 +32,7 @@ function reducer(state, action) {
                 completed: false
             }
             return { ...state, todos: [newTodo, ...state.todos], saved: "" }
+
         case 'toggle-all':
             return { ...state, flag: 'all' }
         case 'toggle-completed':
@@ -52,13 +53,19 @@ function reducer(state, action) {
     }
 }
 export default function App() {
+    let defaultState = {};
+    if (localStorage.getItem("todo-state") === null) {
+        defaultState = { todos: [], saved: "", flag: 'all', darkmode: false };
+    }
+    else {
+        defaultState = JSON.parse(localStorage.getItem("todo-state"))
+    }
+    let [state, dispatch] = useReducer(reducer, defaultState);
 
-    let defaultState = { todos: [], saved: "", flag: 'all', darkmode: false };
-    const [state, dispatch] = useReducer(reducer, defaultState);
-
-    //localStorage
-
-
+    useEffect(() => {
+        localStorage.setItem("todo-state", JSON.stringify(state))
+        console.log(state)
+    }, [state])
 
     let all = state.todos.length;
     let completed = 0;
@@ -130,7 +137,7 @@ export default function App() {
                     }
                 </div>
                 <div className="bottom-container">
-                 
+
                     <div className="toggles-container">
 
                         <button onClick={() => dispatch({ type: 'toggle-all' })} className="toggle all-toggle" style={{ color: state.flag === 'all' ? "#1283da" : "rgba(0, 0, 0, 0.4)", backgroundColor: state.flag === 'all' ? "rgba(255, 255, 255, 0.7)" : "transparent", fontWeight: state.flag === 'all' ? "bold" : "normal" }}>All</button>
