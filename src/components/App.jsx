@@ -116,7 +116,7 @@ export default function App() {
                     <button onClick={() => { dispatch({ type: "add" }); }} className="add-button">+</button>
                 </div>
 
-                <div style={{ color: state.darkmode ? "white" : "black" }} className="todos-container">
+                <div style={{ color: state.darkmode ? "white" : "black"}} className="todos-container">
                     {state.flag === 'all' ? state.todos.map(todoObj => {
                         return (
                             <Todo key={todoObj.id} todoObj={todoObj} dispatch={dispatch} />

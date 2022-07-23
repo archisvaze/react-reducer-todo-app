@@ -169,7 +169,8 @@ button {
   text-shadow: none;
   width: 80%;
   word-wrap: break-word;
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 
 .complete-button {
